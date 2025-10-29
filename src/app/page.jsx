@@ -307,6 +307,20 @@ export default function Home() {
           </div>
         </section>
 
+        {/* EXPERIENCIA LABORAL */}
+<section id="experiencia" className="section fade-up">
+  <h2 className="section-title">
+    <FaLaptopCode /> Experiencia Laboral
+  </h2>
+  <ul>
+    <li>
+      <strong>Caja de Compensación Familiar Cofrem</strong> — 
+      Aprendiz en el área de tecnología (Abril 2023 - Octubre 2023) — 6 meses de experiencia práctica en soporte técnico, mantenimiento de equipos y gestión de sistemas informáticos.
+    </li>
+  </ul>
+</section>
+
+
         {/* CERTIFICADOS */}
         <section id="certificados" className="section fade-up">
           <h2 className="section-title">
