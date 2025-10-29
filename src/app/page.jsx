@@ -170,18 +170,18 @@ export default function Home() {
           <div className="info-container">
             <h1 className="title-glow">¿Quién soy yo?</h1>
             <p className="lead">
-              Soy un profesional en sistemas con una base sólida en mantenimiento
-              de hardware y redes, y actualmente me estoy especializando en
-              desarrollo de software. A lo largo de mi experiencia como técnico
-              en sistemas, perfeccioné habilidades en redes y hardware, pero mi
-              verdadera pasión ha sido siempre la programación. Actualmente,
-              tengo conocimientos básicos en Java y C++ para back-end. Además,
-              poseo un nivel alto en JavaScript, y aunque estoy comenzando con
-              HTML y CSS, continúo aprendiendo y perfeccionando estas
-              tecnologías.
+              Soy un profesional en sistemas con una base sólida en mantenimiento de hardware y redes,
+               actualmente especializado en desarrollo de software y ciencia de datos. A lo largo de mi
+                experiencia, he fortalecido mis conocimientos en lenguajes como C++, Java y JavaScript,
+                 y en frameworks modernos como React, React Native, Next.js, NestJS y Vite.
+
+              Además, tengo experiencia en el manejo de bases de datos SQL (MySQL) y NoSQL (MongoDB), 
+              así como en herramientas de análisis de datos como Python, Power BI y R Studio. Me apasiona
+              el desarrollo backend y el análisis de información aplicada a la toma de decisiones, buscando
+              siempre crear soluciones eficientes, escalables y orientadas a la innovación tecnológica.
             </p>
             <p className="lead">
-              Estoy realizando cursos en Ciencia de Datos (CIIP LATAM). Mi
+              Estoy certificado en Ciencia de Datos (CIIP LATAM). Mi
               objetivo es seguir desarrollándome como desarrollador back-end,
               con enfoque en JavaScript y análisis de datos.
             </p>
