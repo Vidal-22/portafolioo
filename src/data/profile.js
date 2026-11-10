@@ -307,26 +307,50 @@ export const experience = [
   },
 ];
 
+/**
+ * Formación académica, en orden de relevancia.
+ *  status: "current" (en curso) | "pending" (materias finalizadas, pendiente de grado) | "done" (finalizado)
+ *  badge:  etiqueta visible en la tarjeta
+ *  period: texto de estado usado en el CV (/cv)
+ */
 export const education = [
   {
-    title: "Tecnología en Desarrollo de Software",
-    institution: "Corporación Universitaria Minuto de Dios — UNIMINUTO",
-    period: "En curso",
+    id: "ingenieria",
+    title: "Ingeniería de Software",
+    institution: "Corporación Escuela Tecnológica del Oriente – Instituto de Educación Superior",
     status: "current",
+    badge: "En curso · Séptimo semestre",
+    semester: "07",
+    period: "En curso · Séptimo semestre",
+    description:
+      "Actualmente cursando séptimo semestre de Ingeniería de Software, fortaleciendo conocimientos en desarrollo de software, arquitectura de aplicaciones, programación y tecnologías informáticas.",
+    focus: ["Desarrollo de software", "Arquitectura de aplicaciones", "Programación", "Tecnologías informáticas"],
   },
   {
-    title: "Técnico Laboral en Asistencia y Soporte de Tecnologías de la Información",
+    id: "tecnologia",
+    title: "Tecnología en Desarrollo de Software",
+    institution: "Corporación Universitaria Minuto de Dios – UNIMINUTO",
+    status: "pending",
+    badge: "Pendiente de grado",
+    period: "Materias finalizadas · Pendiente de grado",
+    description:
+      "Plan de estudios finalizado en Tecnología en Desarrollo de Software. Actualmente pendiente de culminar el proceso de grado y recibir el título profesional de tecnólogo.",
+  },
+  {
+    id: "tecnico",
+    title: "Técnico en Asistencia y Soporte de TI",
     institution: "Instituto Técnico Cofrem",
-    period: "Graduado · Mayo 2024",
     status: "done",
-    cert: "/certs/Certificado Tecncico.jpeg",
+    badge: "Finalizado",
+    period: "Finalizado",
   },
   {
+    id: "bachiller",
     title: "Bachiller Académico",
-    institution: "Colegio Cofrem — Villavicencio",
-    period: "Graduado · Noviembre 2021",
+    institution: "Colegio Cofrem",
     status: "done",
-    cert: "/certs/Certificado bachiller.jpeg",
+    badge: "Finalizado",
+    period: "Finalizado",
   },
 ];
 

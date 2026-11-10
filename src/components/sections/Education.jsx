@@ -1,47 +1,93 @@
-"use client";
-
-import { useCallback, useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import {
-  TbCertificate,
-  TbChevronLeft,
-  TbChevronRight,
-  TbExternalLink,
-  TbSchool,
-  TbX,
-  TbZoomIn,
-} from "react-icons/tb";
-import { certificates, ciip, education } from "@/data/profile";
+import { TbCircleCheck, TbCode, TbHourglassHigh, TbSchool } from "react-icons/tb";
+import { education } from "@/data/profile";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import TiltCard from "@/components/ui/TiltCard";
 import styles from "./Education.module.css";
 
-const modules = certificates.filter((c) => c.issuer === "CIIP LATAM" && !c.featured);
+const STATUS_ICON = { current: TbCode, pending: TbHourglassHigh, done: TbCircleCheck };
+
+function StatusBadge({ status, children }) {
+  const Icon = STATUS_ICON[status];
+  return (
+    <span className={`${styles.badge} ${styles[`badge_${status}`]}`}>
+      <Icon aria-hidden="true" /> {children}
+    </span>
+  );
+}
+
+/** Formación actual: tarjeta destacada a todo el ancho. */
+function CurrentCard({ item }) {
+  return (
+    <TiltCard as="article" className={`glass holo-border ${styles.current}`} max={3} aria-labelledby={`edu-${item.id}`}>
+      <div className={styles.currentBody}>
+        <div className={styles.currentTop}>
+          <span className={styles.eduIcon} aria-hidden="true">
+            <TbSchool />
+          </span>
+          <StatusBadge status={item.status}>{item.badge}</StatusBadge>
+        </div>
+        <span className={`mono ${styles.label}`}>{"// formación actual"}</span>
+        <h3 id={`edu-${item.id}`} className={styles.currentTitle}>
+          {item.title}
+        </h3>
+        <p className={styles.institution}>{item.institution}</p>
+        <p className={styles.desc}>{item.description}</p>
+        <ul className={styles.focus} aria-label="Áreas de formación">
+          {item.focus.map((f) => (
+            <li key={f} className="chip">
+              {f}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className={styles.semester} aria-hidden="true">
+        <span className={styles.ring} />
+        <span className={styles.ring} />
+        <span className={styles.ring} />
+        <div className={styles.semesterCore}>
+          <span className={`mono ${styles.semesterNum}`}>{item.semester}</span>
+          <span className={styles.semesterLabel}>semestre</span>
+        </div>
+      </div>
+    </TiltCard>
+  );
+}
+
+/** Estudio con materias finalizadas o finalizado. */
+function StudyCard({ item }) {
+  const pending = item.status === "pending";
+  return (
+    <article
+      className={`glass ${styles.study} ${pending ? styles.studyPending : styles.studyDone}`}
+      aria-labelledby={`edu-${item.id}`}
+    >
+      <div className={styles.studyTop}>
+        <span className={`${styles.eduIcon} ${styles.eduIconSm}`} aria-hidden="true">
+          <TbSchool />
+        </span>
+        <StatusBadge status={item.status}>{item.badge}</StatusBadge>
+      </div>
+      <h3 id={`edu-${item.id}`} className={styles.studyTitle}>
+        {item.title}
+      </h3>
+      <p className={styles.institution}>{item.institution}</p>
+      {pending && (
+        <>
+          <p className={styles.check}>
+            <TbCircleCheck aria-hidden="true" /> Materias finalizadas
+          </p>
+          <p className={styles.desc}>{item.description}</p>
+        </>
+      )}
+    </article>
+  );
+}
 
 export default function Education() {
-  const dialogRef = useRef(null);
-  const [index, setIndex] = useState(null);
-
-  const open = useCallback((src) => {
-    const i = certificates.findIndex((c) => c.src === src);
-    if (i >= 0) setIndex(i);
-  }, []);
-  const close = useCallback(() => setIndex(null), []);
-  const step = useCallback(
-    (d) => setIndex((i) => (i === null ? i : (i + d + certificates.length) % certificates.length)),
-    []
-  );
-
-  // Sincroniza el estado con el <dialog> nativo
-  useEffect(() => {
-    const dlg = dialogRef.current;
-    if (!dlg) return;
-    if (index !== null && !dlg.open) dlg.showModal();
-    if (index === null && dlg.open) dlg.close();
-  }, [index]);
-
-  const current = index !== null ? certificates[index] : null;
+  const current = education.filter((e) => e.status === "current");
+  const others = education.filter((e) => e.status !== "current");
 
   return (
     <section id="formacion" className="section" aria-labelledby="edu-title">
@@ -52,172 +98,33 @@ export default function Education() {
           kicker="Formación"
           title={
             <>
-              Formación académica y <span className="grad-text">certificaciones</span>.
+              Formación <span className="grad-text">Académica</span>
             </>
           }
+          sub="Formación en ingeniería y desarrollo de software, construida sobre una base técnica en soporte de TI."
         />
 
-        <div className={styles.top}>
-          {/* ---------- CIIP destacado ---------- */}
-          <Reveal className={styles.featuredWrap}>
-            <TiltCard as="article" className={`glass holo-border ${styles.featured}`} max={4}>
-              <div className={styles.featuredHead}>
-                <span className={styles.badge}>
-                  <TbCertificate aria-hidden="true" /> Formación complementaria
-                </span>
-                <span className={`mono ${styles.hours}`}>{ciip.hours}</span>
-              </div>
-              <h3>{ciip.title}</h3>
-              <p className={styles.inst}>
-                {ciip.institution} · <span className="mono">{ciip.period}</span>
-              </p>
+        <div className={styles.stack}>
+          {current.map((item) => (
+            <Reveal key={item.id}>
+              <CurrentCard item={item} />
+            </Reveal>
+          ))}
 
-              <ol className={styles.modules}>
-                {modules.map((m, i) => (
-                  <li key={m.id}>
-                    <button type="button" onClick={() => open(m.src)}>
-                      <span className={`mono ${styles.modNum}`}>M{i + 1}</span>
-                      <span className={styles.modTitle}>{m.title}</span>
-                      <span className={`mono ${styles.modDate}`}>{m.date}</span>
-                    </button>
-                  </li>
-                ))}
-              </ol>
-
-              <div className={styles.learned}>
-                {ciip.learned.map((l) => (
-                  <span key={l} className="chip">
-                    {l}
-                  </span>
-                ))}
-              </div>
-
-              <button type="button" className="btn btn-primary" onClick={() => open(ciip.cert)}>
-                <TbZoomIn /> Ver certificado general
-              </button>
-            </TiltCard>
-          </Reveal>
-
-          {/* ---------- Académica ---------- */}
-          <ul className={styles.academic}>
-            {education.map((e, i) => (
-              <Reveal as="li" key={e.title} delay={i * 90} className={`glass ${styles.eduCard}`}>
-                <span className={`${styles.eduIcon} ${e.status === "current" ? styles.eduLive : ""}`} aria-hidden="true">
-                  <TbSchool />
-                </span>
-                <div className={styles.eduBody}>
-                  <span className={`mono ${styles.eduPeriod}`}>{e.period}</span>
-                  <h3>{e.title}</h3>
-                  <p>{e.institution}</p>
-                </div>
-                {e.cert && (
-                  <button
-                    type="button"
-                    className={styles.eduView}
-                    onClick={() => open(e.cert)}
-                    aria-label={`Ver diploma: ${e.title}`}
-                  >
-                    <TbZoomIn />
-                  </button>
-                )}
+          <ul className={styles.grid}>
+            {others.map((item, i) => (
+              <Reveal
+                as="li"
+                key={item.id}
+                delay={i * 90}
+                className={item.status === "pending" ? styles.wideCell : undefined}
+              >
+                <StudyCard item={item} />
               </Reveal>
             ))}
           </ul>
         </div>
-
-        {/* ---------- Galería ---------- */}
-        <Reveal className={styles.galleryHead}>
-          <h3>
-            Certificados <span className="mono">({certificates.length})</span>
-          </h3>
-          <p>Haz clic en cualquier certificado para ampliarlo.</p>
-        </Reveal>
-
-        <ul className={styles.gallery}>
-          {certificates.map((c, i) => (
-            <Reveal as="li" key={c.id} delay={(i % 4) * 60}>
-              <button type="button" className={styles.thumb} onClick={() => setIndex(i)}>
-                <span className={styles.thumbImg}>
-                  <Image
-                    src={c.src}
-                    alt=""
-                    fill
-                    sizes="(max-width: 560px) 50vw, (max-width: 980px) 33vw, 260px"
-                    className={styles.img}
-                  />
-                  <span className={styles.zoom} aria-hidden="true">
-                    <TbZoomIn />
-                  </span>
-                </span>
-                <span className={styles.thumbText}>
-                  <span className={styles.thumbTitle}>{c.title}</span>
-                  <span className={`mono ${styles.thumbMeta}`}>
-                    {c.issuer} · {c.date}
-                  </span>
-                </span>
-              </button>
-            </Reveal>
-          ))}
-        </ul>
       </div>
-
-      {/* ---------- Visor ---------- */}
-      <dialog
-        ref={dialogRef}
-        className={styles.dialog}
-        aria-label={current ? current.title : "Certificado"}
-        onClose={close}
-        onClick={(e) => e.target === e.currentTarget && close()}
-        onKeyDown={(e) => {
-          if (e.key === "ArrowRight") step(1);
-          if (e.key === "ArrowLeft") step(-1);
-        }}
-      >
-        {current && (
-          <div className={styles.dialogInner}>
-            <header className={styles.dialogHead}>
-              <div>
-                <p className={styles.dialogTitle}>{current.title}</p>
-                <p className={`mono ${styles.dialogMeta}`}>
-                  {current.issuer} · {current.date}
-                </p>
-              </div>
-              <button type="button" className="btn btn-icon" onClick={close} aria-label="Cerrar">
-                <TbX />
-              </button>
-            </header>
-
-            <div className={styles.dialogImg}>
-              <Image
-                key={current.src}
-                src={current.src}
-                alt={`Certificado: ${current.title}`}
-                width={current.width}
-                height={current.height}
-                sizes="(max-width: 900px) 92vw, 860px"
-                className={styles.full}
-              />
-            </div>
-
-            <footer className={styles.dialogFoot}>
-              <button type="button" className="btn btn-icon" onClick={() => step(-1)} aria-label="Anterior">
-                <TbChevronLeft />
-              </button>
-              <span className="mono">
-                {index + 1} / {certificates.length}
-              </span>
-              <button type="button" className="btn btn-icon" onClick={() => step(1)} aria-label="Siguiente">
-                <TbChevronRight />
-              </button>
-              {current.verify && (
-                <a href={current.verify} target="_blank" rel="noopener noreferrer" className="btn">
-                  <TbExternalLink /> Verificar en Credly
-                </a>
-              )}
-            </footer>
-          </div>
-        )}
-      </dialog>
     </section>
   );
 }
