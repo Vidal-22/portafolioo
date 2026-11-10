@@ -14,53 +14,6 @@ function Phone({ children }) {
   );
 }
 
-function SalonUI() {
-  const rows = [
-    ["09:00", "Corte + barba", "c1"],
-    ["10:30", "Tinte", "c2"],
-    ["12:00", "Manicure", "c3"],
-    ["14:30", "Corte clásico", "c1"],
-  ];
-  return (
-    <div className={styles.stage}>
-      <Phone>
-        <div className={styles.appBar}>
-          <span className={styles.avatarDot} />
-          <div className={styles.lines}>
-            <i style={{ width: "60%" }} />
-            <i style={{ width: "35%" }} />
-          </div>
-        </div>
-        <div className={styles.kpis}>
-          <div>
-            <b>12</b>
-            <small>citas</small>
-          </div>
-          <div>
-            <b>$</b>
-            <small>ingresos</small>
-          </div>
-        </div>
-        <ul className={styles.list}>
-          {rows.map(([h, t, c]) => (
-            <li key={h}>
-              <span className={styles.time}>{h}</span>
-              <span className={styles.item}>{t}</span>
-              <span className={`${styles.tag} ${styles[c]}`} />
-            </li>
-          ))}
-        </ul>
-      </Phone>
-      <div className={`${styles.floatCard} ${styles.fcRight}`}>
-        <span className="mono">RLS</span> establecimiento_id
-      </div>
-      <div className={`${styles.floatCard} ${styles.fcLeft}`}>
-        <span className="mono">auth</span> rol: admin
-      </div>
-    </div>
-  );
-}
-
 function DairyUI() {
   const bars = [52, 68, 61, 80, 74, 90, 84];
   return (
@@ -177,7 +130,6 @@ function WebUI() {
 }
 
 const MAP = {
-  "mobile-dashboard": SalonUI,
   "mobile-chart": DairyUI,
   terminal: TerminalUI,
   ai: AiUI,

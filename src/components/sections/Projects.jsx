@@ -20,12 +20,18 @@ export default function Projects() {
               Soluciones <span className="grad-text">reales</span>, de la base de datos a la interfaz.
             </>
           }
-          sub="Aplicaciones móviles con autenticación y datos multi-tenant, automatización de pruebas y plataformas web."
+          sub="Aplicaciones móviles con bases de datos relacionales, automatización de pruebas y plataformas web."
         />
 
         <ul className={styles.grid}>
           {projects.map((p, i) => (
-            <Reveal as="li" key={p.id} delay={(i % 3) * 90} className={i < 2 ? styles.wide : styles.narrow}>
+            <Reveal
+              as="li"
+              key={p.id}
+              delay={(i % 3) * 90}
+              // 2 tarjetas anchas arriba; el resto en filas de 3 si encajan, si no en pares
+              className={i < 2 || (projects.length - 2) % 3 !== 0 ? styles.wide : styles.narrow}
+            >
               <TiltCard as="article" className={`glass holo-border ${styles.card}`} max={5} aria-labelledby={`p-${p.id}`}>
                 <ProjectVisual type={p.visual} />
 

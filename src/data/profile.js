@@ -32,7 +32,7 @@ export const profile = {
     "Mi formación en Ciencia de Datos y Análisis Predictivo me permite trabajar con Python, R Studio, SQL Server y Power BI para convertir datos en decisiones.",
   ],
   highlights: [
-    { value: "5", label: "proyectos de software" },
+    { value: "4", label: "proyectos de software" },
     { value: "350 h", label: "formación certificada en datos" },
     { value: "2", label: "experiencias en tecnología" },
     { value: "QA", label: "pruebas manuales y automatizadas" },
@@ -170,7 +170,7 @@ export const skillCategories = [
     accent: "blue",
     summary: "Interfaces web y aplicaciones móviles multiplataforma.",
     skills: [
-      { name: "React Native", icon: "react", tier: "proyecto" },
+      { name: "React Native", icon: "react", tier: "base" },
       { name: "Flutter", icon: "flutter", tier: "proyecto" },
       { name: "React", icon: "react", tier: "proyecto" },
       { name: "Next.js", icon: "next", tier: "proyecto" },
@@ -199,27 +199,6 @@ export const skillCategories = [
 ];
 
 export const projects = [
-  {
-    id: "salon",
-    name: "Salón Gestión",
-    kind: "App móvil · Multi-establecimiento",
-    visual: "mobile-dashboard",
-    description:
-      "Sistema de gestión para salones de belleza y barberías: citas, trabajadores, ingresos y liquidaciones, con la información aislada por establecimiento.",
-    stack: ["React Native", "JavaScript", "Supabase", "PostgreSQL", "Supabase Auth"],
-    features: [
-      "Gestión de usuarios y roles",
-      "Administración de citas",
-      "Gestión de trabajadores",
-      "Control de ingresos y liquidaciones",
-      "Separación de datos por establecimiento",
-      "Gestión administrativa",
-    ],
-    // TODO: verifica/ajusta tu participación exacta.
-    role: "Desarrollo de la aplicación, modelado de datos en PostgreSQL y control de acceso por roles con Supabase Auth.",
-    github: null, // TODO: añade el repositorio si es público
-    demo: null,
-  },
   {
     id: "lechera",
     name: "Gestión Lechera Inteligente",

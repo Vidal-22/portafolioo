@@ -131,7 +131,8 @@
   .narrow {
     grid-column: span 3;
   }
-  .grid > li:last-child {
+  /* solo si queda una tarjeta sola en la última fila */
+  .grid > li:last-child:nth-child(odd) {
     grid-column: 1 / -1;
   }
 }
@@ -141,7 +142,7 @@
   }
   .wide,
   .narrow,
-  .grid > li:last-child {
+  .grid > li:last-child:nth-child(odd) {
     grid-column: auto;
   }
 }
