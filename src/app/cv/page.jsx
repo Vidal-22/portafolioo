@@ -110,7 +110,7 @@ export default function CvPage() {
 
           <section className={styles.block}>
             <h2>Formación académica</h2>
-            {education.map((e) => (
+            {education.filter((e) => !e.complementary).map((e) => (
               <div key={e.title} className={styles.entryHead}>
                 <h3>
                   {e.title} — <span className={styles.normal}>{e.institution}</span>
@@ -134,7 +134,7 @@ export default function CvPage() {
               <ul>
                 {ciipModules.map((m) => (
                   <li key={m.id}>
-                    {m.title} ({m.date})
+                    {m.title} ({m.hours})
                   </li>
                 ))}
               </ul>

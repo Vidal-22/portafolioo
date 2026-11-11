@@ -18,7 +18,7 @@ export const profile = {
   email: "danielvidalardila22@gmail.com",
   phone: "+57 305 246 9264",
   phoneHref: "tel:+573052469264",
-  photo: "/yo.jpg",
+  photo: "/yo.jpeg",
   socials: {
     github: "https://github.com/Vidal-22",
     linkedin: "https://www.linkedin.com/in/daniel-vidal-371165310",
@@ -327,6 +327,31 @@ export const education = [
     focus: ["Desarrollo de software", "Arquitectura de aplicaciones", "Programación", "Tecnologías informáticas"],
   },
   {
+    id: "ciip",
+    complementary: true, // formación complementaria (en el CV va en su propio bloque)
+    title: "Ciencia de Datos y Análisis Predictivo aplicado a Banca y Finanzas",
+    institution: "CIIP LATAM",
+    status: "done",
+    badge: "Finalizado",
+    kicker: "Formación complementaria",
+    period: "25 de enero de 2025 — 26 de abril de 2025",
+    hours: "350 horas académicas",
+    description:
+      "Formación complementaria en ciencia de datos aplicada al sector financiero: análisis de bases de datos, programación en Python y R, análisis estadístico, modelos predictivos y visualización de información con Power BI.",
+    focus: [
+      "Ciencia de datos",
+      "Análisis de bases de datos",
+      "Python",
+      "R Studio",
+      "Análisis estadístico",
+      "Modelos predictivos",
+      "Power BI",
+      "Análisis de información financiera",
+      "MongoDB",
+    ],
+    certificatesIssuer: "CIIP LATAM", // los documentos se toman de `certificates`
+  },
+  {
     id: "tecnologia",
     title: "Tecnología en Desarrollo de Software",
     institution: "Corporación Universitaria Minuto de Dios – UNIMINUTO",
@@ -354,21 +379,14 @@ export const education = [
   },
 ];
 
-export const ciip = {
-  title: "Especialización en Ciencia de Datos y Análisis Predictivo aplicado a Banca y Finanzas",
-  institution: "CIIP LATAM — Centro de Investigación e Innovación Profesional",
-  period: "Marzo 2025 — Julio 2025",
-  hours: "350 horas académicas",
-  cert: "/certs/General.png",
-  learned: ["Python", "R Studio", "SQL Server", "Power BI", "Modelos predictivos", "Bases de datos"],
-};
+export const ciip = education.find((e) => e.id === "ciip");
 
 export const certificates = [
   {
     id: "ciip-general",
     title: "Ciencia de Datos y Análisis Predictivo aplicado a Banca y Finanzas",
     issuer: "CIIP LATAM",
-    date: "Mar — Jul 2025 · 350 h",
+    hours: "350 horas académicas",
     src: "/certs/General.png",
     width: 626,
     height: 439,
@@ -388,7 +406,7 @@ export const certificates = [
     id: "r",
     title: "Análisis Predictivo y Gestión de Bases de Datos con R Studio",
     issuer: "CIIP LATAM",
-    date: "Mar — Abr 2025 · 60 h",
+    hours: "60 horas académicas",
     src: "/certs/ANALISIS PREDICTIVO Y GESTION DE BASE DE DATOS CON R STUDIOS PARA BANCA Y FINANZAS.png",
     width: 736,
     height: 520,
@@ -397,7 +415,7 @@ export const certificates = [
     id: "python",
     title: "Programación y Gestión de Datos en Python",
     issuer: "CIIP LATAM",
-    date: "Abr — May 2025 · 60 h",
+    hours: "60 horas académicas",
     src: "/certs/PROGRAMACION Y GESTION DE DATOS EN PYTHON PARA LA BANCA Y FINANZAS.png",
     width: 543,
     height: 390,
@@ -406,7 +424,7 @@ export const certificates = [
     id: "sql",
     title: "Gestión de Datos y Análisis Financiero con SQL Server",
     issuer: "CIIP LATAM",
-    date: "Mayo 2025 · 60 h",
+    hours: "60 horas académicas",
     src: "/certs/GESTION DE DATOS Y ANALISIS FINANCIERA CON SQL.png",
     width: 626,
     height: 442,
@@ -415,7 +433,7 @@ export const certificates = [
     id: "powerbi",
     title: "Visualización de Datos y Automatización de Informes con Power BI",
     issuer: "CIIP LATAM",
-    date: "May — Jun 2025 · 60 h",
+    hours: "60 horas académicas",
     src: "/certs/VISUALIZACION DE DATOS Y REPORTERIA CON POWER BI.png",
     width: 586,
     height: 414,
@@ -424,7 +442,7 @@ export const certificates = [
     id: "supervised",
     title: "Análisis Predictivo y Modelos Supervisados",
     issuer: "CIIP LATAM",
-    date: "Junio 2025 · 60 h",
+    hours: "60 horas académicas",
     src: "/certs/ANALISIS PREDICTIVO YY MODELOS SUPERVISADOS PARA BANCA Y FINANZAS.png",
     width: 486,
     height: 341,
@@ -433,7 +451,7 @@ export const certificates = [
     id: "unsupervised",
     title: "Análisis Predictivo y Modelos No Supervisados",
     issuer: "CIIP LATAM",
-    date: "Julio 2025 · 60 h",
+    hours: "60 horas académicas",
     src: "/certs/ANALISIS PREDICTIVO Y MODELOS NO SUPERVISADOS PARA BANA Y FINANZAS.png",
     width: 642,
     height: 450,

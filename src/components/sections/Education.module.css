@@ -175,6 +175,131 @@
   color: var(--text-2);
 }
 
+/* ---------- Formación complementaria (CIIP) ---------- */
+.badge_complementary {
+  color: #ddd6fe;
+  border-color: rgba(139, 92, 246, 0.5);
+  background: rgba(139, 92, 246, 0.16);
+}
+.complementary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(200px, 24vw, 300px);
+  align-items: center;
+  gap: clamp(20px, 4vw, 48px);
+  padding: clamp(22px, 3.2vw, 36px);
+  overflow: hidden;
+  background:
+    radial-gradient(70% 90% at 100% 50%, rgba(139, 92, 246, 0.2), transparent 60%),
+    linear-gradient(160deg, rgba(20, 28, 62, 0.66), rgba(8, 12, 30, 0.58));
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.complementary:hover {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 30px 60px -30px rgba(139, 92, 246, 0.55);
+}
+.compBody {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+.eduIconData {
+  color: #c4b5fd;
+  border-color: rgba(139, 92, 246, 0.4);
+  background: rgba(139, 92, 246, 0.14);
+  box-shadow: 0 0 24px -6px rgba(139, 92, 246, 0.7);
+}
+.compTitle {
+  font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+  font-weight: 700;
+}
+.meta {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--cyan);
+}
+.meta li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.meta svg {
+  font-size: 1rem;
+}
+.compActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  margin-top: 8px;
+}
+.compHint {
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+/* pila decorativa de documentos */
+.docStack {
+  position: relative;
+  aspect-ratio: 10 / 8;
+  width: 100%;
+  perspective: 900px;
+}
+.docBack,
+.docMid,
+.docFront {
+  position: absolute;
+  inset: 8% 6% 8% 6%;
+  border-radius: 12px;
+  border: 1px solid var(--line-strong);
+  transition: transform 0.6s var(--ease);
+}
+.docBack {
+  background: linear-gradient(160deg, rgba(139, 92, 246, 0.3), rgba(20, 28, 62, 0.8));
+  transform: rotate(-9deg) translate(-8%, 4%);
+}
+.docMid {
+  background: linear-gradient(160deg, rgba(34, 211, 238, 0.25), rgba(20, 28, 62, 0.8));
+  transform: rotate(5deg) translate(7%, 2%);
+}
+.docFront {
+  overflow: hidden;
+  background: #0c1230;
+  box-shadow: 0 24px 50px -20px rgba(0, 0, 0, 0.9), 0 0 40px -14px rgba(34, 211, 238, 0.55);
+  transform: rotate(-1deg);
+}
+.docImg {
+  object-fit: cover;
+  object-position: top;
+}
+.complementary:hover .docBack {
+  transform: rotate(-14deg) translate(-12%, 5%);
+}
+.complementary:hover .docMid {
+  transform: rotate(9deg) translate(11%, 2%);
+}
+.complementary:hover .docFront {
+  transform: rotate(0deg) translateY(-4px) scale(1.03);
+}
+.docCount {
+  position: absolute;
+  right: 2%;
+  bottom: 2%;
+  z-index: 1;
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: #04061a;
+  background: var(--grad);
+  box-shadow: 0 0 20px -4px rgba(34, 211, 238, 0.8);
+}
+
 /* ---------- Otros estudios ---------- */
 .grid {
   list-style: none;
@@ -275,9 +400,23 @@
     grid-row: auto;
   }
 }
+@media (max-width: 860px) {
+  .complementary {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .docStack {
+    order: -1;
+    justify-self: center;
+    width: min(280px, 80%);
+  }
+}
 @media (max-width: 680px) {
   .current {
     grid-template-columns: minmax(0, 1fr);
+  }
+  /* solo el botón de la tarjeta, no los del modal que se monta dentro */
+  .compActions > :global(.btn) {
+    flex: 1 1 100%;
   }
   .semester {
     order: -1;
